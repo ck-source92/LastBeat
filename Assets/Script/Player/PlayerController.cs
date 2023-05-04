@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     bool isDie = false;
 
+    private int jumpCount = 0;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,6 +63,9 @@ public class PlayerController : MonoBehaviour
         }
         transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
         spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
+
+        Debug.Log($"jump count : {jumpCount}");
+        PlayerPrefs.SetInt("jump_count", jumpCount);
 
         if (rb.velocity.y < -24.4f)
         {
@@ -88,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
+                jumpCount++;
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * jumpHeight * Gravity, ForceMode2D.Impulse);
             }
@@ -110,6 +116,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             rb.gravityScale = -4.314969f;
+            jumpCount++;
         }
         else
         {
@@ -127,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            jumpCount++;
             if (isUpsideDown)
             {
                 rb.gravityScale = Mathf.Abs(Mathf.Round(gravityScaleAtStart * 28.9129812f) * Gravity);
