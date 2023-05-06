@@ -9,6 +9,8 @@ public class FuzzyProgram : MonoBehaviour
 
     public List<float[,]> result = new List<float[,]>();
 
+    // [[0.8, 25], [0.6, 50]]
+
     private string[] attempsVariable = new string[] { "sedikit", "cukup", "banyak" };
     private string[] jumpsVariable = new string[] { "jarang", "lumayan", "sering" };
 
@@ -149,5 +151,4 @@ public class FuzzyProgram : MonoBehaviour
             }
         }
     }
-
 }
