@@ -8,6 +8,7 @@ TagManager:
   - Bounching
   - Planeta
   - JumpyJump
+  - Hazard
   layers:
   - Default
   - TransparentFX

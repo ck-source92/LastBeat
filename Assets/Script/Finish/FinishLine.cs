@@ -5,6 +5,7 @@ using UnityEngine;
 public class FinishLine : MonoBehaviour
 {
     int percentage;
+    private int percentageTutorialScene;
     private int percentageLevel1;
     private int percentageLevel2;
     private int percentageLevel3;
@@ -16,6 +17,7 @@ public class FinishLine : MonoBehaviour
     [SerializeField] int diamondReward = 2;
 
     public static bool isFinish = false;
+    public bool isFinishTutorial = false;
     void Awake()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -26,17 +28,26 @@ public class FinishLine : MonoBehaviour
     {
         switch (Loader.SceneSelected)
         {
+            case Loader.Scene.Tutorial:
+                _gameSession.TextLevels.text = "Tutorial";
+                CustomPreference(percentageTutorialScene, "higest_percentage_tutorial_scene", percentage);
+                CheckHigestPercentage(percentageTutorialScene, "higest_percentage_tutorial_scene");
+                GetReachPlayer();
+                break;
             case Loader.Scene.Level1:
+                _gameSession.TextLevels.text = "Level 1";
                 CustomPreference(percentageLevel1, "higest_percentage_level1", percentage);
                 CheckHigestPercentage(percentageLevel1, "higest_percentage_level1");
                 GetReachPlayer();
                 break;
             case Loader.Scene.Level2:
+                _gameSession.TextLevels.text = "Level 2";
                 CustomPreference(percentageLevel2, "higest_percentage_level2", percentage);
                 CheckHigestPercentage(percentageLevel2, "higest_percentage_level2");
                 GetReachPlayer();
                 break;
             case Loader.Scene.Level3:
+                _gameSession.TextLevels.text = "Level 3";
                 CustomPreference(percentageLevel3, "higest_percentage_level3", percentage);
                 CheckHigestPercentage(percentageLevel3, "higest_percentage_level3");
                 GetReachPlayer();
@@ -77,6 +88,18 @@ public class FinishLine : MonoBehaviour
     IEnumerator FinishGame()
     {
         yield return new WaitForSecondsRealtime(.5f);
+        switch (Loader.SceneSelected)
+        {
+            case Loader.Scene.Tutorial:
+                Debug.Log("Tutorial FInish");
+                isFinishTutorial = true;
+                int isTutorialFinishInt = isFinishTutorial ? 1 : 0;
+                Debug.Log("isfinish ? : " + isTutorialFinishInt);
+                PlayerPrefs.SetInt("isFinishTutorial", isTutorialFinishInt);
+                break;
+            default:
+                break;
+        }
         if (_gameSession != null)
         {
             _gameSession.PanelGameOver.SetActive(true);

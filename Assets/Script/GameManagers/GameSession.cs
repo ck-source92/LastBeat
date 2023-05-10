@@ -23,7 +23,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] public GameObject PanelGameOver;
 
     [Header("Panel Game Over")]
-    [SerializeField] TextMeshProUGUI TextLevels;
+    [SerializeField] public TextMeshProUGUI TextLevels;
     [SerializeField] public TextMeshProUGUI TextLevelResult;
     [SerializeField] TextMeshProUGUI TextLevelComplete;
 
@@ -42,17 +42,11 @@ public class GameSession : MonoBehaviour
         TextAttemps.text = "Attemp " + _attemp.ToString();
     }
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        DisplayTime(timer);
-    }
-
     private void RandomNumber()
     {
-        for (int i = 1; i < 54; i++)
+        for (int i = 1; i < 5; i++)
         {
-            int randomNumber = Random.Range(1, 120);
+            int randomNumber = Random.Range(1, 10);
             Debug.Log($"random number : {randomNumber}");
             listAttempNumber.Add(randomNumber);
         }
@@ -78,12 +72,6 @@ public class GameSession : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-    }
-    void DisplayTime(float timeToDisplay)
-    {
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        TextTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     public void SetDiamond(int diamondToAdd)
     {

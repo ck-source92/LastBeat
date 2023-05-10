@@ -38,11 +38,18 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         _GameIsPaused = false;
     }
-    public void BackHome()
+    public void BackMenuLevel()
     {
         FindObjectOfType<GameSession>().ResetGameSession();
         FindObjectOfType<ScreenPersist>().ResetScenePersist();
         Loader.Load(Loader.Scene.MenuLevels);
     }
 
+    public void LoadScenePrevious()
+    {
+        FindObjectOfType<GameSession>().ResetGameSession();
+        FindObjectOfType<ScreenPersist>().ResetScenePersist();
+        Loader.Load(Loader.Scene.Home);
+        Time.timeScale = 1f;
+    }
 }

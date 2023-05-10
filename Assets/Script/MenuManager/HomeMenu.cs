@@ -5,11 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class HomeMenu : MonoBehaviour
 {
+    [SerializeField] GameObject popUpTextTutorial;
     public void GamePlay()
     {
-        StartCoroutine(LoadSceneTo("MenuLevels"));
+        if (PlayerPrefs.GetInt("isFinishTutorial") == 0)
+        {
+            popUpTextTutorial.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(LoadSceneTo("MenuLevels"));
+        }
+    }
+    public void TutorialScene()
+    {
+        FindObjectOfType<AudioMainMenu>().ResetAudioMainMenu();
+        Loader.Load(Loader.Scene.Tutorial);
+        Loader.SceneSelected = Loader.Scene.Tutorial;
     }
 
+    public void TutorialYes()
+    {
+        popUpTextTutorial.SetActive(false);
+    }
     public void QuitGame()
     {
         Application.Quit();

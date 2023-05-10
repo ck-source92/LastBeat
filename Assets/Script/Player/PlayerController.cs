@@ -39,9 +39,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 lastVelocity;
 
-    bool isDie = false;
-
-    private int jumpCount = 0;
+    public bool isDie = false;
 
     void Awake()
     {
@@ -63,9 +61,6 @@ public class PlayerController : MonoBehaviour
         }
         transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
         spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
-
-        Debug.Log($"jump count : {jumpCount}");
-        PlayerPrefs.SetInt("jump_count", jumpCount);
 
         if (rb.velocity.y < -24.4f)
         {
@@ -89,11 +84,11 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 Rotation = SpriteRotate.rotation.eulerAngles;
             Rotation.z = Mathf.Round(Rotation.z / 90) * 90;
-            SpriteRotate.transform.rotation = Quaternion.Euler(Rotation);
+            SpriteRotate.rotation = Quaternion.Euler(Rotation);
+            //SpriteRotate.transform.rotation = Quaternion.Euler(Rotation);
 
             if (Input.GetMouseButton(0))
             {
-                jumpCount++;
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * jumpHeight * Gravity, ForceMode2D.Impulse);
             }
@@ -116,7 +111,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             rb.gravityScale = -4.314969f;
-            jumpCount++;
         }
         else
         {
@@ -134,7 +128,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            jumpCount++;
             if (isUpsideDown)
             {
                 rb.gravityScale = Mathf.Abs(Mathf.Round(gravityScaleAtStart * 28.9129812f) * Gravity);
@@ -178,7 +171,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) { }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Bounching"))

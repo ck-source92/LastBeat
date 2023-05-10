@@ -24,6 +24,8 @@ public class FuzzyProgram : MonoBehaviour
 
     float perkalian_new = 0f;
     float pembagian_new = 0f;
+
+
     private void Start()
     {
         float[] membershipAttemptValues = CalculateMembershipAttempt(55);
@@ -43,12 +45,20 @@ public class FuzzyProgram : MonoBehaviour
         UnbeatInterfensi(value_banyak, value_lumayan);
         UpbeatInterfensi(value_banyak, value_sering);
 
+        //deffuzifikasi
+
         for (int i = 0; i < result.Count; i++)
         {
-            float value = result[i][0, 0];
-            float time = result[i][1, 0];
-            // 0.666 * 30
+            //float value = result[i][0, 0];
+            //float time = result[i][1, 0];
+            // [
+            //      [0.3, 100], 
+            //      [0.3, 200],
+            //      [0.6, 300]
+            // ]
             float perkalian = result[i][0, 0] * result[i][1, 0];
+            //Debug.Log("result 0, 1 = " + result[i][0, 0]);
+            //perkalian = 0.3 * 100 = 30
             // Debug.Log("perkalian : " + perkalian);
             float pembagian = result[i][0, 0];
             // Debug.Log("pembagian : " + pembagian);

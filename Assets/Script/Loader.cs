@@ -12,6 +12,7 @@ public static class Loader
         Level1, Level2, Level3,
         Loading,
         MenuLevels,
+        Tutorial,
         Home
     }
     public static Scene SceneSelected = Scene.Level1;

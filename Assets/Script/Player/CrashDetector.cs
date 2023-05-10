@@ -40,5 +40,6 @@ public class CrashDetector : MonoBehaviour
             _GameSession.ProcessPlayerDeath();
             Destroy(gameObject);
         }
+
     }
 }
