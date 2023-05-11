@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FuzzyProgram : MonoBehaviour
@@ -8,8 +9,6 @@ public class FuzzyProgram : MonoBehaviour
     // Jump = Jarang , Lumayan , Sering
 
     public List<float[,]> result = new List<float[,]>();
-
-    // [[0.8, 25], [0.6, 50]]
 
     private string[] attempsVariable = new string[] { "sedikit", "cukup", "banyak" };
     private string[] jumpsVariable = new string[] { "jarang", "lumayan", "sering" };
@@ -49,19 +48,9 @@ public class FuzzyProgram : MonoBehaviour
 
         for (int i = 0; i < result.Count; i++)
         {
-            //float value = result[i][0, 0];
-            //float time = result[i][1, 0];
-            // [
-            //      [0.3, 100], 
-            //      [0.3, 200],
-            //      [0.6, 300]
-            // ]
+            Debug.Log("result i = " + result[i]);
             float perkalian = result[i][0, 0] * result[i][1, 0];
-            //Debug.Log("result 0, 1 = " + result[i][0, 0]);
-            //perkalian = 0.3 * 100 = 30
-            // Debug.Log("perkalian : " + perkalian);
             float pembagian = result[i][0, 0];
-            // Debug.Log("pembagian : " + pembagian);
 
             perkalian_new += perkalian;
             pembagian_new += pembagian;
