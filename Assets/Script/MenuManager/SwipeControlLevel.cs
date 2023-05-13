@@ -17,12 +17,14 @@ public class SwipeControlLevel : MonoBehaviour
     float[] pos;
     int position = 0;
 
-    private static bool levelWasUnlock = false;
+    private bool levelWasUnlock = false;
+    int isLevelWasUnlockInt;
     void Update()
     {
         coinPlayer = PlayerPrefs.GetInt("total_coins");
+        isLevelWasUnlockInt = PlayerPrefs.GetInt("levelWasUnlock");
 
-        if (levelWasUnlock)
+        if (PlayerPrefs.GetInt("levelWasUnlock") == 1)
         {
             ButtonLevel3.interactable = true;
             ButtonLock.gameObject.SetActive(false);
@@ -74,15 +76,18 @@ public class SwipeControlLevel : MonoBehaviour
 
     public void UnlockLevelThree()
     {
-        if (coinPlayer >= 219 && !levelWasUnlock)
+        if (coinPlayer >= 219 && isLevelWasUnlockInt == 0)
         {
             var newCoin = coinPlayer - 219;
             PlayerPrefs.SetInt("total_coins", newCoin);
+
             ButtonLevel3.interactable = true;
             ButtonLock.gameObject.SetActive(false);
             GameObject.Find("DialogGroup").SetActive(false);
 
             levelWasUnlock = true;
+            int isLevelWasUnlock = levelWasUnlock ? 1 : 0;
+            PlayerPrefs.SetInt("levelWasUnlock", isLevelWasUnlock);
         }
         else
         {

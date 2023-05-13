@@ -44,6 +44,7 @@ public class ScoreManager : MonoBehaviour
 
         Debug.Log($"our attempt {PlayerPrefs.GetInt("attempt")}");
         Debug.Log($"jump count {PlayerPrefs.GetInt("jump_count")}");
+        Debug.Log($"level unlcok : {PlayerPrefs.GetInt("levelWasUnlock")}");
     }
     private void Update()
     {
