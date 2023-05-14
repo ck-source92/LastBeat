@@ -41,10 +41,6 @@ public class ScoreManager : MonoBehaviour
         coinLevel1.text = $"Coin : {PlayerPrefs.GetInt("coin_level_1")}";
         coinLevel2.text = $"Coin : {PlayerPrefs.GetInt("coin_level_2")}";
         coinLevel3.text = $"Coin : {PlayerPrefs.GetInt("coin_level_3")}";
-
-        Debug.Log($"our attempt {PlayerPrefs.GetInt("attempt")}");
-        Debug.Log($"jump count {PlayerPrefs.GetInt("jump_count")}");
-        Debug.Log($"level unlcok : {PlayerPrefs.GetInt("levelWasUnlock")}");
     }
     private void Update()
     {

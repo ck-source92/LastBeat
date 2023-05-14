@@ -48,7 +48,6 @@ public class FuzzyProgram : MonoBehaviour
 
         for (int i = 0; i < result.Count; i++)
         {
-            Debug.Log("result i = " + result[i]);
             float perkalian = result[i][0, 0] * result[i][1, 0];
             float pembagian = result[i][0, 0];
 
@@ -57,6 +56,7 @@ public class FuzzyProgram : MonoBehaviour
         }
         Debug.Log(perkalian_new + " / " + pembagian_new);
         float z = perkalian_new / pembagian_new;
+        PlayerPrefs.SetFloat("result_deffuzifikasi", z);
         Debug.Log($"z = {z}");
     }
 
@@ -133,7 +133,7 @@ public class FuzzyProgram : MonoBehaviour
             {
                 float hasil_output = Mathf.Min(variable_attempt, variable_jump);
                 Debug.Log($"hasil output unbeat : {hasil_output}");
-                result.Add(new float[,] { { hasil_output }, { 30 } });
+                result.Add(new float[,] { { hasil_output }, { 6 } });
             }
         }
     }
@@ -146,7 +146,7 @@ public class FuzzyProgram : MonoBehaviour
             {
                 float hasil_output = Mathf.Min(variable_attempt, variable_jump);
                 Debug.Log($"hasil output upbeat : {hasil_output}");
-                result.Add(new float[,] { { hasil_output }, { 70 } });
+                result.Add(new float[,] { { hasil_output }, { 14 } });
             }
         }
     }
