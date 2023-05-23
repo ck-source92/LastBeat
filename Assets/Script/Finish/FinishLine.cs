@@ -13,7 +13,6 @@ public class FinishLine : MonoBehaviour
     PlayerController _playerController;
     GameSession _gameSession;
     AudioPlayer audioPlayer;
-    Helper helper;
 
     [SerializeField] int diamondReward = 2;
 
@@ -46,7 +45,19 @@ public class FinishLine : MonoBehaviour
                 CheckHigestPercentage(percentageLevel2, "higest_percentage_level2");
                 GetReachPlayer();
                 break;
-            case Loader.Scene.Level3:
+            case Loader.Scene.Level3Middle:
+                _gameSession.TextLevels.text = "Level 3";
+                percentageLevel3 = percentage;
+                CheckHigestPercentage(percentageLevel3, "higest_percentage_level3");
+                GetReachPlayer();
+                break;
+            case Loader.Scene.Level3_Unbeat:
+                _gameSession.TextLevels.text = "Level 3";
+                percentageLevel3 = percentage;
+                CheckHigestPercentage(percentageLevel3, "higest_percentage_level3");
+                GetReachPlayer();
+                break;
+            case Loader.Scene.Level3_Upbeat:
                 _gameSession.TextLevels.text = "Level 3";
                 percentageLevel3 = percentage;
                 CheckHigestPercentage(percentageLevel3, "higest_percentage_level3");

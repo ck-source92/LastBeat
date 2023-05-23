@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bass : MonoBehaviour
+public class MouseTrap120bpm : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioPlayer audioPlayer;
@@ -21,7 +21,7 @@ public class Bass : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //audioSource.clip = audioPlayer.bassClip;
+            audioSource.clip = audioPlayer.mouseTrap120bpm;
             audioSource.Play();
         }
     }

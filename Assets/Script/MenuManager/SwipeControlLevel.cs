@@ -134,7 +134,6 @@ public class SwipeControlLevel : MonoBehaviour
         // unbeat
         if (valueDeffuzifikasi <= 6.0)
         {
-            Debug.Log("masuk scene unbeat");
             Loader.Load(Loader.Scene.Level3_Unbeat);
             Loader.SceneSelected = Loader.Scene.Level3_Unbeat;
             _audioMainMenu.ResetAudioMainMenu();
@@ -142,14 +141,12 @@ public class SwipeControlLevel : MonoBehaviour
         // upbeat
         else if (valueDeffuzifikasi > 6.0 && valueDeffuzifikasi <= 14.0)
         {
-            Debug.Log("masuk scene middle");
             Loader.Load(Loader.Scene.Level3Middle);
             Loader.SceneSelected = Loader.Scene.Level3Middle;
             _audioMainMenu.ResetAudioMainMenu();
         }
         else if (valueDeffuzifikasi > 14.0)
         {
-            Debug.Log("masuk scene upbeat");
             Loader.Load(Loader.Scene.Level3_Upbeat);
             Loader.SceneSelected = Loader.Scene.Level3_Upbeat;
             _audioMainMenu.ResetAudioMainMenu();
