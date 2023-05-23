@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class SwipeControlLevel : MonoBehaviour
 {
+    private AudioSource audioSource;
+    private AudioPlayer audioPlayer;
+
     [SerializeField] GameObject horizontalScrollbar;
     [SerializeField] Button ButtonLevel3;
     [SerializeField] Button ButtonLock;
 
     [SerializeField] TextMeshProUGUI textUnlockFail;
+
+    private AudioMainMenu _audioMainMenu;
 
     float scroll_pos = 0;
     int coinPlayer;
@@ -19,6 +24,21 @@ public class SwipeControlLevel : MonoBehaviour
 
     private bool levelWasUnlock = false;
     int isLevelWasUnlockInt;
+
+    private void Awake()
+    {
+        if(_audioMainMenu == null)
+        {
+            _audioMainMenu = FindObjectOfType<AudioMainMenu>();
+        }
+
+        if (audioPlayer == null)
+            audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (audioSource == null)
+            audioSource = FindObjectOfType<AudioSource>();
+
+    }
+
     void Update()
     {
         coinPlayer = PlayerPrefs.GetInt("total_coins");
@@ -110,8 +130,30 @@ public class SwipeControlLevel : MonoBehaviour
     }
     public void LoadLevelThree()
     {
-        Loader.Load(Loader.Scene.Level3);
-        Loader.SceneSelected = Loader.Scene.Level3;
-        FindObjectOfType<AudioMainMenu>().ResetAudioMainMenu();
+        float valueDeffuzifikasi = PlayerPrefs.GetFloat("result_deffuzifikasi");
+        // unbeat
+        if (valueDeffuzifikasi <= 6.0)
+        {
+            Debug.Log("masuk scene unbeat");
+            Loader.Load(Loader.Scene.Level3_Unbeat);
+            Loader.SceneSelected = Loader.Scene.Level3_Unbeat;
+            _audioMainMenu.ResetAudioMainMenu();
+        }
+        // upbeat
+        else if (valueDeffuzifikasi > 6.0 && valueDeffuzifikasi <= 14.0)
+        {
+            Debug.Log("masuk scene middle");
+            Loader.Load(Loader.Scene.Level3Middle);
+            Loader.SceneSelected = Loader.Scene.Level3Middle;
+            _audioMainMenu.ResetAudioMainMenu();
+        }
+        else if (valueDeffuzifikasi > 14.0)
+        {
+            Debug.Log("masuk scene upbeat");
+            Loader.Load(Loader.Scene.Level3_Upbeat);
+            Loader.SceneSelected = Loader.Scene.Level3_Upbeat;
+            _audioMainMenu.ResetAudioMainMenu();
+        }
+       
     }
 }

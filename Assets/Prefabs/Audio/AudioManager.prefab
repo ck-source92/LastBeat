@@ -51,6 +51,9 @@ MonoBehaviour:
   explotionVolume: 4
   coinPickupClip: {fileID: 8300000, guid: df4b54e1a6fb7e349a9727c3d66caa34, type: 3}
   coinPickupVolume: 2
+  mouseTrap120bpm: {fileID: 8300000, guid: 6dd10d5a7a9c23c4d8d4425bc336779d, type: 3}
+  mouseTrap148bpm: {fileID: 8300000, guid: 7adcb51918a56c64a9258db837e79349, type: 3}
+  mouseTrap152bpm: {fileID: 8300000, guid: 4969eb27f2b7e384eb1ea828a211bf07, type: 3}
 --- !u!82 &472002069449190565
 AudioSource:
   m_ObjectHideFlags: 0

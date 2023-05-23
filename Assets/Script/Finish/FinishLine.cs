@@ -13,6 +13,7 @@ public class FinishLine : MonoBehaviour
     PlayerController _playerController;
     GameSession _gameSession;
     AudioPlayer audioPlayer;
+    Helper helper;
 
     [SerializeField] int diamondReward = 2;
 

@@ -26,6 +26,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: 347631529546e0848969c8a147d8a18d
+  - enabled: 1
+    path: Assets/Scenes/Level3_Unbeat.unity
+    guid: 5e65869a5474fb5498d7018cfdd6bf0d
+  - enabled: 1
+    path: Assets/Scenes/Level3_Upbeat.unity
+    guid: eb488bcfff224f843a6cf5d3784b1748
+  - enabled: 1
+    path: Assets/Scenes/Level3Middle.unity
+    guid: 38c3e3231d12ac44a9183cd097569c1e
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 028953fe6e1e7b44d80b85f0c0e80750, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 30666567a20ced241aa8b33c6d3bdedc, type: 2}

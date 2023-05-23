@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.XR.GoogleVr;
 
 public class GameSession : MonoBehaviour
 {
+    private AudioSource audioSource;
+    private AudioPlayer audioPlayer;
+
     private int coin;
     private int diamond;
 
@@ -29,6 +33,11 @@ public class GameSession : MonoBehaviour
 
     void Awake()
     {
+        if (audioPlayer == null)
+            audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (audioSource == null)
+            audioSource = FindObjectOfType<AudioSource>();
+
         int numberGameSession = FindObjectsOfType<GameSession>().Length;
         if (numberGameSession > 1)
         {
@@ -38,8 +47,28 @@ public class GameSession : MonoBehaviour
     }
     void Start()
     {
+        float valueDeffuzifikasi = PlayerPrefs.GetFloat("result_deffuzifikasi");
         RandomNumber();
         TextAttemps.text = "Attemp " + _attemp.ToString();
+
+        switch (Loader.SceneSelected)
+        {
+            case Loader.Scene.Level3Middle:
+                if (valueDeffuzifikasi <= 9.5)
+                {
+                    audioSource.clip = audioPlayer.mouseTrap120bpm;
+                }
+                else if (valueDeffuzifikasi > 9.5 && valueDeffuzifikasi <= 11.0)
+                {
+                    audioSource.clip = audioPlayer.mouseTrap148bpm;
+                }
+                else if (valueDeffuzifikasi > 11.0)
+                {
+                    audioSource.clip = audioPlayer.mouseTrap152bpm;
+                }
+                audioSource.Play();
+                break;
+        }
     }
 
     private void RandomNumber()

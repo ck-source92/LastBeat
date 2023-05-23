@@ -9,6 +9,8 @@ TagManager:
   - Planeta
   - JumpyJump
   - Hazard
+  - Guitar
+  - Bass
   layers:
   - Default
   - TransparentFX

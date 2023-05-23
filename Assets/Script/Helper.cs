@@ -23,7 +23,6 @@ public class Helper : MonoBehaviour
         return result;
     }
 
-
     public static GameObject Find(string search, bool isActive)
     {
         var scene = SceneManager.GetActiveScene();

@@ -9,7 +9,7 @@ public static class Loader
     private class LoadingMonoBehaviour : MonoBehaviour { }
     public enum Scene
     {
-        Level1, Level2, Level3,
+        Level1, Level2, Level3, Level3_Unbeat, Level3_Upbeat, Level3Middle,
         Loading,
         MenuLevels,
         Tutorial,

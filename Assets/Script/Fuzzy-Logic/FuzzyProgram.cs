@@ -7,6 +7,10 @@ public class FuzzyProgram : MonoBehaviour
 {
     // Attempt = Sedikit , Cukup , Banyak
     // Jump = Jarang , Lumayan , Sering
+    int jump_level_one;
+    int jump_level_two;
+
+    int attempt;
 
     public List<float[,]> result = new List<float[,]>();
 
@@ -23,7 +27,6 @@ public class FuzzyProgram : MonoBehaviour
 
     float perkalian_new = 0f;
     float pembagian_new = 0f;
-
 
     private void Start()
     {
@@ -58,6 +61,13 @@ public class FuzzyProgram : MonoBehaviour
         float z = perkalian_new / pembagian_new;
         PlayerPrefs.SetFloat("result_deffuzifikasi", z);
         Debug.Log($"z = {z}");
+    }
+
+    private void Update()
+    { 
+        jump_level_one = PlayerPrefs.GetInt("amount_level_one_jump");
+        jump_level_two = PlayerPrefs.GetInt("amount_level_two_jump");
+        attempt =  PlayerPrefs.GetInt("attempt");
     }
 
     private void OutputMemberships(float[] membershipsAttemp, float[] membershipsJump)

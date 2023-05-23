@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     bool isUpsideDown;
 
     Vector3 lastVelocity;
-
+    float speed;
     public bool isDie = false;
 
     void Awake()
@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 1f;
         gravityScaleAtStart = rb.gravityScale;
+
+        speed = PlayerPrefs.GetFloat("result_deffuzifikasi");
     }
     void Update()
     {
@@ -59,7 +61,16 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
+
+        switch (Loader.SceneSelected)
+        {
+            case Loader.Scene.Level3Middle:
+                transform.position += speed * Time.deltaTime * Vector3.right;
+                break;
+            default:
+                transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
+                break;
+        }
         spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
 
         if (rb.velocity.y < -24.4f)
