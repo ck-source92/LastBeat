@@ -49,10 +49,9 @@ public class GameSession : MonoBehaviour
 
     private void RandomNumber()
     {
-        for (int i = 1; i < 5; i++)
+        for (int i = 1; i < 50; i++)
         {
-            int randomNumber = Random.Range(1, 10);
-            Debug.Log($"random number : {randomNumber}");
+            int randomNumber = Random.Range(1, 30);
             listAttempNumber.Add(randomNumber);
         }
     }
@@ -60,8 +59,16 @@ public class GameSession : MonoBehaviour
     {
         _attemp++;
         TextAttemps.text = "Attemp " + _attemp.ToString();
-        // save attempt 
-        PlayerPrefs.SetInt("attempt", _attemp);
+        // save attempt
+        switch (Loader.SceneSelected)
+        {
+            case Loader.Scene.Level1:
+                PlayerPrefs.SetInt("attempt_level_1", _attemp);
+                break;
+            case Loader.Scene.Level2:
+                PlayerPrefs.SetInt("attempt_level_2", _attemp);
+                break;
+        }
         if (listAttempNumber.Contains(_attemp))
         {
             PanelGameOver.SetActive(true);

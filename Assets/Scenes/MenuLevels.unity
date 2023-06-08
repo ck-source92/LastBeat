@@ -282,8 +282,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 167404175}
-        m_TargetAssemblyTypeName: SwipeControlLevel, Assembly-CSharp
+      - m_Target: {fileID: 167404176}
+        m_TargetAssemblyTypeName: ScrollController, Assembly-CSharp
         m_MethodName: Previous
         m_Mode: 1
         m_Arguments:
@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 167404174}
   - component: {fileID: 167404173}
   - component: {fileID: 167404175}
+  - component: {fileID: 167404176}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -560,10 +561,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ab89d4b340f604fb5efb9d07cdd94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalScrollbar: {fileID: 422819789}
   ButtonLevel3: {fileID: 162452475}
   ButtonLock: {fileID: 2060142045}
   textUnlockFail: {fileID: 470348295}
+--- !u!114 &167404176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167404171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701bce1e2c2fda44cb593b6d4e4da3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalScrollbar: {fileID: 422819789}
 --- !u!1 &167742717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,8 +1879,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 167404175}
-        m_TargetAssemblyTypeName: SwipeControlLevel, Assembly-CSharp
+      - m_Target: {fileID: 167404176}
+        m_TargetAssemblyTypeName: ScrollController, Assembly-CSharp
         m_MethodName: Next
         m_Mode: 1
         m_Arguments:
@@ -2946,7 +2959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I wanna fell
+  m_text: 'Un Beat '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 728554c13b712e84a91682f1f4a4fdcf, type: 2}
   m_sharedMaterial: {fileID: -4197975956171109136, guid: 728554c13b712e84a91682f1f4a4fdcf, type: 2}
@@ -5773,7 +5786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '219 Coins
+  m_text: '119 Coins
 
     For Unlock This Level'
   m_isRightToLeft: 0

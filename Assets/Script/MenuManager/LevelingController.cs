@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-public class SwipeControlLevel : MonoBehaviour
+public class LevelingController : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioPlayer audioPlayer;
 
-    [SerializeField] GameObject horizontalScrollbar;
     [SerializeField] Button ButtonLevel3;
     [SerializeField] Button ButtonLock;
 
@@ -17,10 +16,7 @@ public class SwipeControlLevel : MonoBehaviour
 
     private AudioMainMenu _audioMainMenu;
 
-    float scroll_pos = 0;
     int coinPlayer;
-    float[] pos;
-    int position = 0;
 
     private bool levelWasUnlock = false;
     int isLevelWasUnlockInt;
@@ -38,8 +34,7 @@ public class SwipeControlLevel : MonoBehaviour
             audioSource = FindObjectOfType<AudioSource>();
 
     }
-
-    void Update()
+    private void Start()
     {
         coinPlayer = PlayerPrefs.GetInt("total_coins");
         isLevelWasUnlockInt = PlayerPrefs.GetInt("levelWasUnlock");
@@ -50,43 +45,6 @@ public class SwipeControlLevel : MonoBehaviour
             ButtonLock.gameObject.SetActive(false);
         }
 
-        pos = new float[transform.childCount];
-        float distance = 1f / (pos.Length - 1f);
-        for (int i = 0; i < pos.Length; i++)
-        {
-            pos[i] = distance * i;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            scroll_pos = horizontalScrollbar.GetComponent<Scrollbar>().value;
-        }
-        else
-        {
-            for (int i = 0; i < pos.Length; i++)
-            {
-                if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
-                {
-                    horizontalScrollbar.GetComponent<Scrollbar>().value = Mathf.Lerp(horizontalScrollbar.GetComponent<Scrollbar>().value, pos[i], 0.15f);
-                }
-            }
-        }
-
-    }
-    public void Previous()
-    {
-        if (position > 0)
-        {
-            position -= 1;
-            scroll_pos = pos[position];
-        }
-    }
-    public void Next()
-    {
-        if (position < pos.Length - 1)
-        {
-            position += 1;
-            scroll_pos = pos[position];
-        }
     }
 
     public void BackToMenu()
@@ -96,9 +54,9 @@ public class SwipeControlLevel : MonoBehaviour
 
     public void UnlockLevelThree()
     {
-        if (coinPlayer >= 219 && isLevelWasUnlockInt == 0)
+        if (coinPlayer >= 119 && isLevelWasUnlockInt == 0)
         {
-            var newCoin = coinPlayer - 219;
+            var newCoin = coinPlayer - 119;
             PlayerPrefs.SetInt("total_coins", newCoin);
 
             ButtonLevel3.interactable = true;

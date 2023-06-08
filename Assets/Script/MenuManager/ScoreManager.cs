@@ -30,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         coinLevel1 = GameObject.Find("CoinLevel1").GetComponent<TextMeshProUGUI>();
         coinLevel2 = GameObject.Find("CoinLevel2").GetComponent<TextMeshProUGUI>();
         coinLevel3 = GameObject.Find("CoinLevel3").GetComponent<TextMeshProUGUI>();
-        PlayerPrefs.SetInt("total_coins", 999);
     }
 
     private void Start()

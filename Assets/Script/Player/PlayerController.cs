@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     };
 
     float gravityScaleAtStart;
-    //int percentage;
 
     [Header("Ground Check")]
     [SerializeField] Transform GroundCheckTransform;
@@ -54,6 +53,13 @@ public class PlayerController : MonoBehaviour
         gravityScaleAtStart = rb.gravityScale;
 
         speed = PlayerPrefs.GetFloat("result_deffuzifikasi");
+
+        switch (Loader.SceneSelected)
+        {
+            case Loader.Scene.Level3Middle:
+                transform.position += speed * Time.deltaTime * Vector3.right;
+                break;
+        }
     }
     void Update()
     {
@@ -62,15 +68,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        switch (Loader.SceneSelected)
-        {
-            case Loader.Scene.Level3Middle:
-                transform.position += speed * Time.deltaTime * Vector3.right;
-                break;
-            default:
-                transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
-                break;
-        }
+        transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
         spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
 
         if (rb.velocity.y < -24.4f)
@@ -96,7 +94,6 @@ public class PlayerController : MonoBehaviour
             Vector3 Rotation = SpriteRotate.rotation.eulerAngles;
             Rotation.z = Mathf.Round(Rotation.z / 90) * 90;
             SpriteRotate.rotation = Quaternion.Euler(Rotation);
-            //SpriteRotate.transform.rotation = Quaternion.Euler(Rotation);
 
             if (Input.GetMouseButton(0))
             {
@@ -121,11 +118,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            rb.gravityScale = -4.314969f;
+            rb.gravityScale = -2.94f;
         }
         else
         {
-            rb.gravityScale = 4.314969f;
+            rb.gravityScale = 2.94f;
         }
 
         rb.gravityScale *= Gravity;

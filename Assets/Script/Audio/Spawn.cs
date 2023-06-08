@@ -4,31 +4,24 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    List<GameObject> enemyPrefabs = new List<GameObject>();
-    public GameObject spawnPrefab1;
-    public GameObject spawnPrefab2;
-    public GameObject spawnPrefab3;
+    [SerializeField] List<GameObject> musicPrefabs;
 
     int outputValue;
     void Start()
     {
         // Add enemy prefabs to the list
-        enemyPrefabs.Add(spawnPrefab1);
-        enemyPrefabs.Add(spawnPrefab2);
-        enemyPrefabs.Add(spawnPrefab3);
-
         float valueDeffuzifikasi = PlayerPrefs.GetFloat("result_deffuzifikasi");
         if (valueDeffuzifikasi <= 9.5)
         {
-            outputValue = 1;
+            outputValue = 0;
         }
         else if (valueDeffuzifikasi > 9.5 && valueDeffuzifikasi <= 11.0)
         {
-            outputValue = 2;
+            outputValue = 1;
         }
         else if (valueDeffuzifikasi > 11.0)
         {
-            outputValue = 3;
+            outputValue = 2;
         }
 
         ActivateGameObjects(outputValue);
@@ -36,18 +29,15 @@ public class Spawn : MonoBehaviour
 
     private void ActivateGameObjects(int numToActivate)
     {
-        // Activate the specified number of game objects
-        for (int i = 0; i < numToActivate; i++)
+        if (numToActivate < musicPrefabs.Count)
         {
-            if (i < enemyPrefabs.Count)
-            {
-                enemyPrefabs[i].SetActive(true);
-            }
-            else
-            {
-                Debug.LogWarning("Not enough enemy prefabs in the list.");
-                break;
-            }
+            // Deactivate all game objects
+            musicPrefabs[numToActivate].SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid number of game objects to activate.");
+            return;
         }
     }
 }

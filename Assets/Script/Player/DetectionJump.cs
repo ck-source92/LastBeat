@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class DetectionJump : MonoBehaviour
 {
-    [SerializeField] GameObject markerPrefab;
-
     int jumpCountLevel1 = 0;
     int jumpCountLevel2 = 0;
-    void Start()
-    {
-        jumpCountLevel1 = 0;
-        jumpCountLevel2 = 0;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(markerPrefab, transform.position, Quaternion.identity);
-        }
-
         switch (Loader.SceneSelected)
         {
             case Loader.Scene.Level1:

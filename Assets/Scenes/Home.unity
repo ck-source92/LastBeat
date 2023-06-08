@@ -2349,7 +2349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1858186741}
-        m_TargetAssemblyTypeName: SwipeControlLevel, Assembly-CSharp
+        m_TargetAssemblyTypeName: ScrollController, Assembly-CSharp
         m_MethodName: Next
         m_Mode: 1
         m_Arguments:
@@ -3478,7 +3478,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1858186741}
-        m_TargetAssemblyTypeName: SwipeControlLevel, Assembly-CSharp
+        m_TargetAssemblyTypeName: ScrollController, Assembly-CSharp
         m_MethodName: Previous
         m_Mode: 1
         m_Arguments:
@@ -4836,13 +4836,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1858186737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81ab89d4b340f604fb5efb9d07cdd94d, type: 3}
+  m_Script: {fileID: 11500000, guid: 701bce1e2c2fda44cb593b6d4e4da3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalScrollbar: {fileID: 1625831909}
-  ButtonLevel3: {fileID: 0}
-  ButtonLock: {fileID: 0}
-  textUnlockFail: {fileID: 0}
 --- !u!1001 &1862528089
 PrefabInstance:
   m_ObjectHideFlags: 0

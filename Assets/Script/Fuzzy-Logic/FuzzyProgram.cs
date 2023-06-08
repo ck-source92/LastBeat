@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class FuzzyProgram : MonoBehaviour
 {
-    // Attempt = Sedikit , Cukup , Banyak
-    // Jump = Jarang , Lumayan , Sering
-    int jump_level_one;
-    int jump_level_two;
-
-    int attempt;
 
     public List<float[,]> result = new List<float[,]>();
 
@@ -30,8 +24,11 @@ public class FuzzyProgram : MonoBehaviour
 
     private void Start()
     {
-        float[] membershipAttemptValues = CalculateMembershipAttempt(55);
-        float[] membershipJumpValues = CalculateMembershipJump(60);
+        int attemptedDivisionValue = (PlayerPrefs.GetInt("attempt_level_1") + PlayerPrefs.GetInt("attempt_level_2"));
+        int jumpDivisionValue = (PlayerPrefs.GetInt("amount_level_one_jump") + PlayerPrefs.GetInt("amount_level_two_jump"));
+
+        float[] membershipAttemptValues = CalculateMembershipAttempt(attemptedDivisionValue);
+        float[] membershipJumpValues = CalculateMembershipJump(jumpDivisionValue);
 
         OutputMemberships(membershipAttemptValues, membershipJumpValues);
 
@@ -55,19 +52,14 @@ public class FuzzyProgram : MonoBehaviour
             float pembagian = result[i][0, 0];
 
             perkalian_new += perkalian;
+            Debug.Log(perkalian + "perkalian ");
             pembagian_new += pembagian;
+
         }
         Debug.Log(perkalian_new + " / " + pembagian_new);
         float z = perkalian_new / pembagian_new;
         PlayerPrefs.SetFloat("result_deffuzifikasi", z);
         Debug.Log($"z = {z}");
-    }
-
-    private void Update()
-    { 
-        jump_level_one = PlayerPrefs.GetInt("amount_level_one_jump");
-        jump_level_two = PlayerPrefs.GetInt("amount_level_two_jump");
-        attempt =  PlayerPrefs.GetInt("attempt");
     }
 
     private void OutputMemberships(float[] membershipsAttemp, float[] membershipsJump)
@@ -90,21 +82,21 @@ public class FuzzyProgram : MonoBehaviour
 
     private float[] CalculateMembershipAttempt(int value)
     {
-        if (value > 0 && value <= 30)
+        if (value > 0 && value <= 40)
         {
             value_sedikit = 1f;
         }
-        else if (value > 30 && value <= 45)
+        else if (value > 40 && value <= 80)
         {
-            value_sedikit = (45f - value) / 15f;
-            value_cukup = (value - 30f) / 15f;
+            value_sedikit = (80f - value) / 40f;
+            value_cukup = (value - 40f) / 40f;
         }
-        else if (value > 45 && value <= 75)
+        else if (value > 80 && value <= 120)
         {
-            value_cukup = (75f - value) / 30f;
-            value_banyak = (value - 45f) / 30f;
+            value_cukup = (120f - value) / 40f;
+            value_banyak = (value - 80f) / 40f;
         }
-        else if (value >= 75)
+        else if (value >= 120)
         {
             value_banyak = 1f;
         }
@@ -113,21 +105,21 @@ public class FuzzyProgram : MonoBehaviour
     private float[] CalculateMembershipJump(int value)
     {
 
-        if (value > 0 && value <= 30)
+        if (value > 0 && value <= 105)
         {
             value_jarang = 1f;
         }
-        else if (value > 30 && value <= 50)
+        else if (value > 105 && value <= 175)
         {
-            value_jarang = (50f - value) / 20f;
-            value_lumayan = (value - 30f) / 20f;
+            value_jarang = (175f - value) / 70f;
+            value_lumayan = (value - 105f) / 70f;
         }
-        else if (value > 50 && value <= 80)
+        else if (value > 175 && value <= 280)
         {
-            value_lumayan = (80f - value) / 30f;
-            value_sering = (value - 50f) / 30f;
+            value_lumayan = (280f - value) / 105f;
+            value_sering = (value - 175f) / 105f;
         }
-        else if (value >= 80)
+        else if (value >= 280)
         {
             value_sering = 1f;
         }

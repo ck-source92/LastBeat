@@ -726,6 +726,10 @@ PrefabInstance:
       propertyPath: currentSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3148784294064320664, guid: 3983d6400b380184697b1965286becf4, type: 3}
+      propertyPath: CurrentGameMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3148784294064320675, guid: 3983d6400b380184697b1965286becf4, type: 3}
       propertyPath: m_Name
       value: Player
