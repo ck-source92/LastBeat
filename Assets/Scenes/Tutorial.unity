@@ -167,7 +167,6 @@ GameObject:
   m_Component:
   - component: {fileID: 113051638}
   - component: {fileID: 113051637}
-  - component: {fileID: 113051639}
   m_Layer: 0
   m_Name: VC Player
   m_TagString: Untagged
@@ -229,58 +228,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &113051639
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113051636}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &157276185
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +669,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3148784292689689540, guid: 3983d6400b380184697b1965286becf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3148784294064320664, guid: 3983d6400b380184697b1965286becf4, type: 3}
       propertyPath: currentSpeed
       value: 0
@@ -776,6 +727,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3148784294064320677, guid: 3983d6400b380184697b1965286becf4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148784294064320678, guid: 3983d6400b380184697b1965286becf4, type: 3}
+      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -919,7 +874,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -17096,8 +17051,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -14, y: -24, z: 0}
-  m_Size: {x: 1045, y: 57, z: 1}
+  m_Origin: {x: -14, y: -36, z: 0}
+  m_Size: {x: 1045, y: 69, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -19261,22 +19216,22 @@ Tilemap:
       e33: 6.84e-43
   - m_RefCount: 0
     m_Data:
-      e00: 1.745399e-18
+      e00: 1.1833389e-18
       e01: 0
-      e02: -7.266213e+19
-      e03: -7.266213e+19
-      e10: 6.81e-43
+      e02: -2.1013882e-19
+      e03: -2.1013882e-19
+      e10: 6.9e-43
       e11: 0
-      e12: 6.8e-43
-      e13: 6.8e-43
-      e20: -2.523241e-32
-      e21: 7.399e-42
-      e22: 2.6704554e-19
-      e23: -2.5612894e-29
+      e12: 6.88e-43
+      e13: 6.88e-43
+      e20: 2.6564488e-17
+      e21: 8.34e-43
+      e22: 1.0229486e-18
+      e23: -2.893652e-29
       e30: 4.5904e-41
       e31: 0
-      e32: 6.81e-43
-      e33: 6.84e-43
+      e32: 6.9e-43
+      e33: 6.92e-43
   - m_RefCount: 21
     m_Data:
       e00: -1
@@ -19319,8 +19274,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: -6, z: 0}
-  m_Size: {x: 665, y: 45, z: 1}
+  m_Origin: {x: 0, y: -35, z: 0}
+  m_Size: {x: 665, y: 74, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEditor.XR;
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Speeds.Speed currentSpeed;
     [SerializeField] GameModes.Gamemodes CurrentGameMode;
 
     Rigidbody2D rb;
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     Animator animator;
 
     readonly float[] SpeedValue =
@@ -21,36 +23,26 @@ public class PlayerController : MonoBehaviour
         19.29f   // 5
     };
 
-    float gravityScaleAtStart;
-
     [Header("Ground Check")]
-    [SerializeField] Transform GroundCheckTransform;
     [SerializeField] float GroundCheckRadius;
     [SerializeField] LayerMask GroundMask;
 
     [SerializeField] Sprite[] listSprite;
-    [SerializeField] Transform SpriteRotate;
+    [SerializeField] public Transform SpriteRotate;
 
-    [HideInInspector]
-    [SerializeField] float jumpHeight = 26.6581f;
-    int Gravity = 1;
-    bool isUpsideDown;
-
-    Vector3 lastVelocity;
+    public int Gravity = 1;
     float speed;
-    public bool isDie = false;
+    public bool clickProcess = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         animator = gameObject.GetComponentInChildren<Animator>();
-
     }
     void Start()
     {
         Time.timeScale = 1f;
-        gravityScaleAtStart = rb.gravityScale;
 
         speed = PlayerPrefs.GetFloat("result_deffuzifikasi");
 
@@ -61,95 +53,35 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-    void Update()
+    void FixedUpdate()
     {
-        if (isDie)
-        {
-            return;
-        }
-
         transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
         spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
-
-        if (rb.velocity.y < -24.4f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -24.4f);
-        }
-
-        lastVelocity = rb.velocity;
         Invoke(CurrentGameMode.ToString(), 0);
     }
-
-    bool OnGround()
+    public bool OnGround()
     {
-        return Physics2D.OverlapBox(GroundCheckTransform.position + Vector3.up - Vector3.up * (Gravity - 1 / -2), Vector2.right * 1.1f + Vector2.up * GroundCheckRadius, 0, GroundMask);
+        return Physics2D.OverlapBox(transform.position + Vector3.down * Gravity * 0.5f, Vector2.right * 1.1f + Vector2.up * GroundCheckRadius, 0, GroundMask);
     }
-
     #region Type Characters
     private void Cube()
     {
         animator.enabled = false;
-        if (OnGround())
-        {
-            Vector3 Rotation = SpriteRotate.rotation.eulerAngles;
-            Rotation.z = Mathf.Round(Rotation.z / 90) * 90;
-            SpriteRotate.rotation = Quaternion.Euler(Rotation);
-
-            if (Input.GetMouseButton(0))
-            {
-                rb.velocity = Vector2.zero;
-                rb.AddForce(Vector2.up * jumpHeight * Gravity, ForceMode2D.Impulse);
-            }
-        }
-        else
-        {
-            SpriteRotate.Rotate(Vector3.back, 452.4152186f * Time.deltaTime * Gravity);
-        }
-
-        rb.gravityScale = gravityScaleAtStart * Gravity;
+        Generic.CreateGameMode(rb, this, true, 20.5269f, 9.057f, true, false, 409.1f);
     }
 
     private void Ship()
     {
         animator.enabled = false;
-
+        rb.gravityScale = 2.93f * (Input.GetMouseButton(0) ? -1 : 1) * Gravity;
+        Generic.LimitYVelocity(19.29f, rb);
         transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
         SpriteRotate.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-        if (Input.GetMouseButton(0))
-        {
-            rb.gravityScale = -2.94f;
-        }
-        else
-        {
-            rb.gravityScale = 2.94f;
-        }
-
-        rb.gravityScale *= Gravity;
     }
-
     private void Gatot()
     {
         animator.enabled = true;
-
-        SpriteRotate.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (isUpsideDown)
-            {
-                rb.gravityScale = Mathf.Abs(Mathf.Round(gravityScaleAtStart * 28.9129812f) * Gravity);
-                spriteRenderer.flipY = false;
-            }
-            else
-            {
-                rb.gravityScale = Mathf.Round(gravityScaleAtStart * 28.9129812f) * -Gravity;
-                spriteRenderer.flipY = true;
-            }
-
-            isUpsideDown = !isUpsideDown;
-        }
-
+        Generic.CreateGameMode(rb, this, true, 238.29f, 6.2f, false, true, 0, 238.29f);
     }
     #endregion
     public void ChangeBehaviourPlayerThroughPortal(GameModes.Gamemodes Gamemodes, Speeds.Speed Speed, int gravity, int State)
@@ -175,10 +107,9 @@ public class PlayerController : MonoBehaviour
             Vector3 jumpDirection = transform.up + transform.forward;
 
             rb.velocity = Vector2.zero;
-            rb.AddForce(jumpDirection.normalized * 38.89175f * Gravity, ForceMode2D.Impulse);
+            rb.AddForce(jumpDirection.normalized * 27.89175f * Gravity, ForceMode2D.Impulse);
         }
     }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Bounching"))
@@ -188,7 +119,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 jumpDirection = transform.up + transform.forward;
 
                 rb.velocity = Vector2.zero;
-                rb.AddForce(jumpDirection.normalized * 38.89175f * Gravity, ForceMode2D.Impulse);
+                rb.AddForce(jumpDirection.normalized * 27.89175f * Gravity, ForceMode2D.Impulse);
             }
         }
     }

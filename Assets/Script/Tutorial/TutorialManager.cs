@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    PlayerController controller;
     [SerializeField] GameObject[] popUpTextTutorial;
     private int popUpIndex;
 
-    // Update is called once per frame
     void Update()
     { 
         for (int i = 0; i < popUpTextTutorial.Length; i++)

@@ -11,6 +11,7 @@ TagManager:
   - Hazard
   - Guitar
   - Bass
+  - Tilemap
   layers:
   - Default
   - TransparentFX

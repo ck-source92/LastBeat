@@ -14,7 +14,7 @@ public class GameSession : MonoBehaviour
 
     List<int> listAttempNumber = new List<int>();
 
-    int _attemp = 1;
+    int _attempt = 1;
     [SerializeField] TextMeshProUGUI TextAttemps;
     [SerializeField] TextMeshProUGUI TextPickupCoin;
     [SerializeField] TextMeshProUGUI TextTimer;
@@ -44,7 +44,7 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         RandomNumber();
-        TextAttemps.text = "Attemp " + _attemp.ToString();
+        TextAttemps.text = "Attempt " + _attempt.ToString();
     }
 
     private void RandomNumber()
@@ -57,19 +57,19 @@ public class GameSession : MonoBehaviour
     }
     public void ProcessPlayerDeath()
     {
-        _attemp++;
-        TextAttemps.text = "Attemp " + _attemp.ToString();
+        _attempt++;
+        TextAttemps.text = "Attempt " + _attempt.ToString();
         // save attempt
         switch (Loader.SceneSelected)
         {
             case Loader.Scene.Level1:
-                PlayerPrefs.SetInt("attempt_level_1", _attemp);
+                PlayerPrefs.SetInt("attempt_level_1", _attempt);
                 break;
             case Loader.Scene.Level2:
-                PlayerPrefs.SetInt("attempt_level_2", _attemp);
+                PlayerPrefs.SetInt("attempt_level_2", _attempt);
                 break;
         }
-        if (listAttempNumber.Contains(_attemp))
+        if (listAttempNumber.Contains(_attempt))
         {
             PanelGameOver.SetActive(true);
             TextLevelComplete.enabled = false;
@@ -88,7 +88,7 @@ public class GameSession : MonoBehaviour
     public void SetDiamond(int diamondToAdd)
     {
         diamond += diamondToAdd;
-        if (_attemp < 5)
+        if (_attempt < 5)
         {
             diamond += 10;
         }
