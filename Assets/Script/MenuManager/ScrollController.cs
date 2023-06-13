@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScrollController : MonoBehaviour
 {
-
     [SerializeField] GameObject horizontalScrollbar;
+    [SerializeField] GameObject previousButton;
+    [SerializeField] GameObject nextButton;
 
     float scroll_pos = 0;
     float[] pos;
     int position = 0;
+
     void Update()
     {
         pos = new float[transform.childCount];
@@ -33,6 +36,7 @@ public class ScrollController : MonoBehaviour
                 }
             }
         }
+        UpdateButtonActivation();
     }
     public void Previous()
     {
@@ -48,6 +52,19 @@ public class ScrollController : MonoBehaviour
         {
             position += 1;
             scroll_pos = pos[position];
+        }
+    }
+
+    void UpdateButtonActivation()
+    {
+        if (previousButton != null)
+        {
+            previousButton.SetActive(position > 0);
+        }
+
+        if (nextButton != null)
+        {
+            nextButton.SetActive(position < pos.Length - 1);
         }
     }
 
