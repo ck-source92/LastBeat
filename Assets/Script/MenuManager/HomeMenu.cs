@@ -23,7 +23,6 @@ public class HomeMenu : MonoBehaviour
         Loader.Load(Loader.Scene.Tutorial);
         Loader.SceneSelected = Loader.Scene.Tutorial;
     }
-
     public void TutorialYes()
     {
         popUpTextTutorial.SetActive(false);

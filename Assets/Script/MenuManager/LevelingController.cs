@@ -46,12 +46,10 @@ public class LevelingController : MonoBehaviour
         }
 
     }
-
     public void BackToMenu()
     {
         Loader.Load(Loader.Scene.Home);
     }
-
     public void UnlockLevelThree()
     {
         if (coinPlayer >= 119 && isLevelWasUnlockInt == 0)
@@ -73,7 +71,6 @@ public class LevelingController : MonoBehaviour
             textUnlockFail.gameObject.SetActive(true);
         }
     }
-
     public void LoadLevelOne()
     {
         Loader.Load(Loader.Scene.Level1);

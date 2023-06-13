@@ -4840,6 +4840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalScrollbar: {fileID: 1625831909}
+  previousButton: {fileID: 1287103296}
+  nextButton: {fileID: 734263771}
 --- !u!1001 &1862528089
 PrefabInstance:
   m_ObjectHideFlags: 0
