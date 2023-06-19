@@ -49,9 +49,10 @@ public class GameSession : MonoBehaviour
 
     private void RandomNumber()
     {
-        for (int i = 1; i < 50; i++)
+        for (int i = 1; i < 80; i++)
         {
-            int randomNumber = Random.Range(1, 30);
+            int randomNumber = Random.Range(2, 50);
+            Debug.Log(randomNumber);
             listAttempNumber.Add(randomNumber);
         }
     }
