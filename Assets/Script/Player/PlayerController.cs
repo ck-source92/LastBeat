@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Speeds.Speed currentSpeed;
     [SerializeField] GameModes.Gamemodes CurrentGameMode;
 
-    Rigidbody2D rb;
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
+    
+    Rigidbody2D rb;
     Animator animator;
 
     readonly float[] SpeedValue =
@@ -52,10 +54,13 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    void Update()
+    {
+        spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
+    }
     void FixedUpdate()
     {
         transform.position += SpeedValue[(int)currentSpeed] * Time.deltaTime * Vector3.right;
-        spriteRenderer.sprite = listSprite[(int)CurrentGameMode];
         Invoke(CurrentGameMode.ToString(), 0);
     }
     public bool OnGround()

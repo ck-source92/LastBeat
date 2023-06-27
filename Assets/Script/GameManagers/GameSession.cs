@@ -52,7 +52,6 @@ public class GameSession : MonoBehaviour
         for (int i = 1; i < 80; i++)
         {
             int randomNumber = Random.Range(2, 50);
-            Debug.Log(randomNumber);
             listAttempNumber.Add(randomNumber);
         }
     }
@@ -60,7 +59,6 @@ public class GameSession : MonoBehaviour
     {
         _attempt++;
         TextAttemps.text = "Attempt " + _attempt.ToString();
-        // save attempt
         switch (Loader.SceneSelected)
         {
             case Loader.Scene.Level1:
