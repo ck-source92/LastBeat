@@ -17,7 +17,6 @@ public class AudioMainMenu : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(Advertisement.isShowing + "hello");
         m_AudioSource.mute = Advertisement.isShowing;
     }
     public void ResetAudioMainMenu()

@@ -27,10 +27,6 @@ public class HomeMenu : MonoBehaviour
     {
         popUpTextTutorial.SetActive(false);
     }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
     IEnumerator LoadSceneTo(string scene)
     {
         SceneManager.LoadScene(scene);
