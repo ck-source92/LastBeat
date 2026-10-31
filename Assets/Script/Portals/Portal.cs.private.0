@@ -1,0 +1,48 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class Portal : MonoBehaviour
+{
+    PlayerController controller;
+
+    public GameModes.Gamemodes Gamemode;
+    public Speeds.Speed Speed;
+    public bool Gravity;
+    public int State;
+
+    private void Awake()
+    {
+        controller = FindAnyObjectByType<PlayerController>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        try
+        {
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player == null)
+            {
+                player = collision.GetComponentInParent<PlayerController>();
+            }
+            if (player == null && (collision.CompareTag("Player") || controller != null))
+            {
+                player = controller != null ? controller : FindAnyObjectByType<PlayerController>();
+            }
+
+            if (player != null)
+            {
+                controller = player;
+                player.ChangeBehaviourPlayerThroughPortal(Gamemode, Speed, Gravity ? 1 : -1, State);
+            }
+            else if (collision.CompareTag("Player"))
+            {
+                Debug.Log("player missing");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
+    }
+}

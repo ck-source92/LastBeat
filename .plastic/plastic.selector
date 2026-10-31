@@ -1,4 +1,3 @@
 repository "LastBeat@dwicandra@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main/dev"

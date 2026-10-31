@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         animator.enabled = false;
         rb.gravityScale = 2.93f * (Input.GetMouseButton(0) ? -1 : 1) * Gravity;
         Generic.LimitYVelocity(19.29f, rb);
-        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
+        transform.rotation = Quaternion.Euler(0, 0, rb.linearVelocity.y * 2);
         SpriteRotate.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
     private void Gatot()
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 jumpDirection = transform.up + transform.forward;
 
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             rb.AddForce(jumpDirection.normalized * 27.89175f * Gravity, ForceMode2D.Impulse);
         }
     }
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 jumpDirection = transform.up + transform.forward;
 
-                rb.velocity = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
                 rb.AddForce(jumpDirection.normalized * 27.89175f * Gravity, ForceMode2D.Impulse);
             }
         }

@@ -5,9 +5,9 @@ static public class Generic
     static public void LimitYVelocity(float limit, Rigidbody2D rb)
     {
         int gravityMultiplier = (int)(Mathf.Abs(rb.gravityScale) / rb.gravityScale);
-        if (rb.velocity.y * -gravityMultiplier > limit)
+        if (rb.linearVelocity.y * -gravityMultiplier > limit)
         {
-            rb.velocity = Vector2.up * -limit * gravityMultiplier;
+            rb.linearVelocity = Vector2.up * -limit * gravityMultiplier;
         }
     }
 
@@ -26,7 +26,7 @@ static public class Generic
             if (playerController.OnGround() && !playerController.clickProcess || !onGroundRequired && !playerController.clickProcess)
             {
                 playerController.clickProcess = true;
-                rb.velocity = Vector2.up * initialVelocity * playerController.Gravity;
+                rb.linearVelocity = Vector2.up * initialVelocity * playerController.Gravity;
                 playerController.Gravity *= flipOnClick ? -1 : 1;
             }
         }

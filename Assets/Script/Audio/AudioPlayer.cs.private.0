@@ -1,0 +1,208 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AudioPlayer : MonoBehaviour
+{
+    [Header("Level Complete")]
+    [SerializeField] AudioClip levelCompleteClip;
+    [SerializeField][Range(0f, 5f)] float levelCompleteVolume = 2f;
+
+    [Header("Explotion")]
+    [SerializeField] AudioClip explotionClip;
+    [SerializeField][Range(0f, 5f)] float explotionVolume = 4f;
+
+    [Header("Coin Pickup")]
+    [SerializeField] AudioClip coinPickupClip;
+    [SerializeField][Range(0f, 5f)] float coinPickupVolume = 2f;
+
+    [Header("Level 3 - Unbeat (120 bpm)")]
+    [SerializeField] public AudioClip mouseTrap120bpm;
+
+    [Header("Level 3 - Middle (148 bpm)")]
+    [SerializeField] public AudioClip mouseTrap148bpm;
+
+    [Header("Level 3 - Upbeat (152 bpm)")]
+    [SerializeField] public AudioClip mouseTrap152bpm;
+
+    [Header("Level 1")]
+    [SerializeField] public AudioClip Level1;
+
+    [Header("Level 2")]
+    [SerializeField] public AudioClip Level2;
+
+    [Header("Tutorial")]
+    [SerializeField] public AudioClip Tutorial;
+
+    [Header("Fade Settings")]
+    [SerializeField] private float fadeInDuration = 1.0f;
+    [SerializeField] private float fadeOutDuration = 1.0f;
+    [SerializeField][Range(0f, 1f)] private float musicMaxVolume = 1.0f;
+
+    private Coroutine fadeCoroutine;
+    private float currentTargetVolume = 1.0f;
+
+    private void Awake()
+    {
+        AudioSource source = GetComponent<AudioSource>();
+        if (source != null && source.volume > 0f)
+        {
+            currentTargetVolume = source.volume;
+        }
+        else
+        {
+            currentTargetVolume = musicMaxVolume;
+        }
+    }
+
+    public void PlayLevelMusic(string sceneName, Loader.Scene sceneSelected)
+    {
+        AudioClip clipToPlay = null;
+
+        if (sceneName == Loader.Scene.Tutorial.ToString() || sceneSelected == Loader.Scene.Tutorial)
+        {
+            clipToPlay = Tutorial;
+        }
+        else if (sceneName == Loader.Scene.Level1.ToString() || sceneSelected == Loader.Scene.Level1)
+        {
+            clipToPlay = Level1;
+        }
+        else if (sceneName == Loader.Scene.Level2.ToString() || sceneSelected == Loader.Scene.Level2)
+        {
+            clipToPlay = Level2;
+        }
+        else if (sceneName == Loader.Scene.Level3_Unbeat.ToString() || sceneSelected == Loader.Scene.Level3_Unbeat)
+        {
+            clipToPlay = mouseTrap120bpm;
+        }
+        else if (sceneName == Loader.Scene.Level3Middle.ToString() || sceneSelected == Loader.Scene.Level3Middle)
+        {
+            clipToPlay = mouseTrap148bpm;
+        }
+        else if (sceneName == Loader.Scene.Level3_Upbeat.ToString() || sceneSelected == Loader.Scene.Level3_Upbeat)
+        {
+            clipToPlay = mouseTrap152bpm;
+        }
+        else if (sceneName == Loader.Scene.Level3.ToString() || sceneSelected == Loader.Scene.Level3)
+        {
+            float defuzz = PlayerPrefs.GetFloat("result_deffuzifikasi", 10f);
+            if (defuzz <= 6.0f)
+                clipToPlay = mouseTrap120bpm;
+            else if (defuzz > 14.0f)
+                clipToPlay = mouseTrap152bpm;
+            else
+                clipToPlay = mouseTrap148bpm;
+        }
+
+        if (clipToPlay != null)
+        {
+            AudioSource source = GetComponent<AudioSource>();
+            if (source != null)
+            {
+                if (fadeCoroutine != null)
+                {
+                    StopCoroutine(fadeCoroutine);
+                    fadeCoroutine = null;
+                }
+
+                source.clip = clipToPlay;
+                source.volume = 0f;
+                source.Play();
+                FadeInMusic(fadeInDuration);
+            }
+        }
+    }
+
+    public void FadeInMusic(float duration = -1f)
+    {
+        float d = duration > 0f ? duration : fadeInDuration;
+        StartFade(currentTargetVolume, d, stopOnComplete: false);
+    }
+
+    public void FadeOutMusic(float duration = -1f)
+    {
+        float d = duration > 0f ? duration : fadeOutDuration;
+        StartFade(0f, d, stopOnComplete: true);
+    }
+
+    public void StopMusic()
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
+        }
+
+        AudioSource source = GetComponent<AudioSource>();
+        if (source != null)
+        {
+            source.Stop();
+        }
+    }
+
+    private void StartFade(float targetVol, float duration, bool stopOnComplete)
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+        fadeCoroutine = StartCoroutine(FadeRoutine(targetVol, duration, stopOnComplete));
+    }
+
+    private IEnumerator FadeRoutine(float targetVol, float duration, bool stopOnComplete)
+    {
+        AudioSource source = GetComponent<AudioSource>();
+        if (source == null) yield break;
+
+        float startVol = source.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            source.volume = Mathf.Lerp(startVol, targetVol, duration > 0f ? elapsed / duration : 1f);
+            yield return null;
+        }
+
+        source.volume = targetVol;
+
+        if (stopOnComplete)
+        {
+            source.Stop();
+        }
+
+        fadeCoroutine = null;
+    }
+
+    public void PlayLevelCompleteClip()
+    {
+        if (levelCompleteClip != null)
+        {
+            PlayClip(levelCompleteClip, levelCompleteVolume);
+        }
+    }
+    public void PlayCoinPickupClip()
+    {
+        if (coinPickupClip != null)
+        {
+            PlayClip(coinPickupClip, coinPickupVolume);
+        }
+    }
+
+    public void PlayExplotionClip()
+    {
+        if (explotionClip != null)
+        {
+            PlayClip(explotionClip, explotionVolume);
+        }
+    }
+    void PlayClip(AudioClip clip, float volume)
+    {
+        if (clip != null)
+        {
+            Vector3 cameraPos = Camera.main != null ? Camera.main.transform.position : transform.position;
+            AudioSource.PlayClipAtPoint(clip, cameraPos, volume);
+        }
+    }
+
+}
