@@ -1,3 +1,0 @@
-repository "LastBeat@dwicandra@cloud"
-  path "/"
-    smartbranch "/main/dev"
