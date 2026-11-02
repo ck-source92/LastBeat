@@ -49,6 +49,7 @@ public class GameSession : MonoBehaviour
 
     private void RandomNumber()
     {
+        Debug.Log("RandomNumber");
         for (int i = 1; i < 80; i++)
         {
             int randomNumber = Random.Range(2, 50);
